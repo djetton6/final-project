@@ -1,7 +1,7 @@
 // var createError = require('http-errors');
 var express = require('express');
-var pug = require('pug');
-// var path = require('path');
+//var pug = require('pug');
+var path = require('path');
 // var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
@@ -13,9 +13,18 @@ var workouts = require('./routes/workouts');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+//app.set('views', path.join(__dirname, 'views'));
+//app.set('view engine', 'pug');
+//app.use(express.static(__dirname + '/public'));
 
+var cons = require('consolidate');
+
+// view engine setup
+app.engine('html', cons.swig)
+app.set('views', path.join(__dirname, 'views'));
+console.log(app.set)
+
+app.set('view engine', 'html');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
