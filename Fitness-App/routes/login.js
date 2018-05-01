@@ -4,10 +4,8 @@ let mongoose = require('mongoose');
 var User = require('../models/users')
 
 router.get('/', function(req, res, next) {
-  Workout.find(function (err, workouts) {
+  res.render('login', { title: 'Express' });
     if (err) return console.error(err);
-    res.json(workouts);
-  })  
 });
 
 router.post('/login', function(req, res, next) {
@@ -22,10 +20,10 @@ router.post('/login', function(req, res, next) {
     newuser.save(function(err, savedUser) {
         if(err) {
             console.log(err);
-            retur res.status(500).send();
+            return res.status(500).send();
         }
+          return res.status(200).send();
+     
     }
-
-});
-
+})
 module.exports = router;
